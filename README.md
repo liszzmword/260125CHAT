@@ -11,9 +11,9 @@
 
 ## 기술 스택
 
-- **Frontend**: Next.js 14, React, TypeScript
-- **AI**: Google Gemini AI (gemini-2.0-flash-exp)
-- **Styling**: CSS Modules
+- **Frontend**: Next.js 13, React, TypeScript
+- **AI**: Google Gemini AI (gemini-2.5-flash)
+- **Styling**: CSS Modules (Apple-inspired design)
 - **Deployment**: Vercel
 
 ## 설치 및 실행

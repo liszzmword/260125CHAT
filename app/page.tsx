@@ -102,9 +102,9 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1 className={styles.title}>🗞️ 뉴스 AI 챗봇</h1>
+        <h1 className={styles.title}>뉴스 AI 챗봇</h1>
         <p className={styles.description}>
-          키워드를 입력하고 구글 뉴스를 검색한 후, AI와 대화해보세요
+          키워드로 최신 뉴스를 검색하고 AI와 대화하세요
         </p>
 
         <div className={styles.searchSection}>
@@ -127,7 +127,7 @@ export default function Home() {
 
         {news.length > 0 && (
           <div className={styles.newsSection}>
-            <h2>📰 검색된 뉴스 ({news.length}개)</h2>
+            <h2>검색된 뉴스 {news.length}개</h2>
             <div className={styles.newsList}>
               {news.map((item, index) => (
                 <div key={index} className={styles.newsItem}>
@@ -148,7 +148,7 @@ export default function Home() {
 
         {messages.length > 0 && (
           <div className={styles.chatSection}>
-            <h2>💬 AI와 대화하기</h2>
+            <h2>AI 대화</h2>
             <div className={styles.chatMessages}>
               {messages.map((message, index) => (
                 <div
@@ -157,13 +157,12 @@ export default function Home() {
                     message.role === 'user' ? styles.userMessage : styles.assistantMessage
                   }`}
                 >
-                  <strong>{message.role === 'user' ? '나' : 'AI'}:</strong>{' '}
                   {message.content}
                 </div>
               ))}
               {chatLoading && (
                 <div className={`${styles.message} ${styles.assistantMessage}`}>
-                  <strong>AI:</strong> 생각 중...
+                  생각하는 중...
                 </div>
               )}
             </div>

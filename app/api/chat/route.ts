@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
 
     // Gemini AI 초기화
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // 뉴스 컨텍스트 생성
     const newsContext = news
