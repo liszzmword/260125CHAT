@@ -57,8 +57,10 @@ export async function POST(request: NextRequest) {
       let snippet = '';
       $article.find('p, div').each((i, el) => {
         const text = $(el).text().trim();
-        if (text && text.length > 20 && !snippet) {
-          snippet = text;
+        // HTML 태그와 특수 문자 제거
+        const cleanText = text.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+        if (cleanText && cleanText.length > 20 && !snippet) {
+          snippet = cleanText;
         }
       });
 
@@ -68,7 +70,7 @@ export async function POST(request: NextRequest) {
           link,
           source,
           pubDate,
-          snippet: snippet || '요약 없음',
+          snippet: snippet || '뉴스 요약 준비중',
         });
       }
     });
@@ -89,7 +91,18 @@ export async function POST(request: NextRequest) {
           const link = $item.find('link').text().trim();
           const pubDate = $item.find('pubDate').text().trim();
           const source = $item.find('source').text().trim() || '출처 미상';
-          const description = $item.find('description').text().trim();
+          let description = $item.find('description').text().trim();
+          
+          // HTML 태그 및 링크 완전히 제거
+          description = description
+            .replace(/<a[^>]*>.*?<\/a>/gi, '') // <a> 태그 전체 제거
+            .replace(/<[^>]*>/g, '') // 모든 HTML 태그 제거
+            .replace(/&nbsp;/g, ' ')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .trim();
 
           if (title && link) {
             news.push({
@@ -97,7 +110,7 @@ export async function POST(request: NextRequest) {
               link,
               source,
               pubDate,
-              snippet: description || '요약 없음',
+              snippet: description || '뉴스 요약 준비중',
             });
           }
         });
